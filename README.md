@@ -81,6 +81,39 @@ Sau khi chạy `bootstrap.sh`, thêm:
 3. Ở mỗi bước **[HANDOFF]**, copy lệnh `/speckit.*` mà Claude in ra, tự dán chạy, rồi báo lại.
 4. Duyệt ở mỗi **[DỪNG]** (review intake, analyze, test gate, deploy).
 
+### Sơ đồ workflow
+
+```mermaid
+flowchart TD
+    A["📁 Đặt tài liệu vào docs/01-03/"]:::user --> B["⌨️ Gõ /design-to-code"]:::user
+    B --> C["Tạo git branch NNN-feature"]:::auto
+    C --> D["design-intake đọc tài liệu → docs/intake/"]:::auto
+    D --> E{"DỪNG — review intake<br/>prompt + ambiguities"}:::stop
+    E --> F["/speckit.specify — prompt từ intake"]:::handoff
+    F --> G{"Có ambiguities?"}:::stop
+    G -- Có --> H["/speckit.clarify → docs/04-decisions/"]:::handoff
+    G -- Không --> I["/speckit.plan"]:::handoff
+    H --> I
+    I --> J["/speckit.tasks"]:::handoff
+    J --> K{"DỪNG — /speckit.analyze<br/>còn cảnh báo?"}:::stop
+    K -- Có, sửa spec/plan/tasks --> F
+    K -- Không --> L["/speckit.implement → sinh code"]:::handoff
+    L --> M{"code-reviewer<br/>còn Blocking?"}:::auto
+    M -- Có --> L
+    M -- Không --> N{"DỪNG — test gate<br/>lint/test/build xanh?"}:::stop
+    N -- Đỏ --> L
+    N -- Xanh --> O["DỪNG — deploy theo CLAUDE.md"]:::stop
+    O --> P["✅ Commit intake + decisions + specs"]:::user
+
+    classDef user fill:#e0f2fe,stroke:#0369a1,color:#0c4a6e
+    classDef auto fill:#dcfce7,stroke:#15803d,color:#14532d
+    classDef handoff fill:#fef9c3,stroke:#a16207,color:#713f12
+    classDef stop fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+```
+
+**Chú thích màu:**
+🟦 Bạn thao tác · 🟩 `[TỰ CHẠY]` Claude tự làm (git + subagent) · 🟨 `[HANDOFF]` bạn tự dán lệnh `/speckit.*` · 🟥 `[DỪNG]` checkpoint chờ duyệt
+
 ### `/design-to-code` là runbook điều phối
 Nó **không tự chạy được** các slash command `/speckit.*` (Claude Code không cho command gọi
 command). Vì vậy có 2 loại bước:
