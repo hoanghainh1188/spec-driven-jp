@@ -6,14 +6,16 @@ Chế độ này chỉ cài **2 subagent + 1 command** vào Claude Code của b�
 
 ```
 # Trong Claude Code
-/plugin marketplace add <owner>/<repo-name>
-/plugin install spec-driven-jp
+/plugin marketplace add hoanghainh1188/spec-driven-jp
+/plugin install spec-driven-jp@hoanghainh1188
 ```
 
-Sau khi cài, các file sau sẽ có mặt trong `~/.claude/`:
-- `~/.claude/agents/design-intake.md`
-- `~/.claude/agents/code-reviewer.md`
-- `~/.claude/commands/design-to-code.md`
+> `spec-driven-jp` là tên plugin, `hoanghainh1188` là tên marketplace (khai báo trong
+> `.claude-plugin/marketplace.json`). Cú pháp `<plugin>@<marketplace>` là bắt buộc.
+
+Sau khi cài, các agent + command của plugin sẽ khả dụng ngay trong Claude Code:
+- 2 subagent: `design-intake`, `code-reviewer`
+- 1 command: `/design-to-code`
 
 ## Bạn cần chuẩn bị thủ công (nếu dùng chế độ plugin)
 
@@ -47,5 +49,5 @@ Nếu bạn muốn tất cả những thứ trên được tạo tự động, h
 ## Gỡ cài đặt
 
 ```
-/plugin uninstall spec-driven-jp
+/plugin uninstall spec-driven-jp@hoanghainh1188
 ```

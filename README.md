@@ -25,7 +25,7 @@ Cách này phù hợp khi bạn muốn dùng bộ agent + command cho **nhiều 
 ```bash
 # Trong Claude Code
 /plugin marketplace add hoanghainh1188/spec-driven-jp
-/plugin install spec-driven-jp
+/plugin install spec-driven-jp@hoanghainh1188
 ```
 
 Plugin sẽ cài `.claude/agents/design-intake.md`, `.claude/agents/code-reviewer.md`, và command `/design-to-code` vào user scope (`~/.claude/`). Xem chi tiết ở `plugin/README.md`.
