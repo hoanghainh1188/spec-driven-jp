@@ -145,6 +145,24 @@ Trình tự đầy đủ:
 
 Cuối cùng, commit `docs/intake/`, `docs/04-decisions/`, `specs/<feature>/` làm bằng chứng traceability.
 
+## Làm việc nhóm (nhiều người / 1 dự án)
+
+Để tránh **git conflict** và **lệch ngữ cảnh** khi nhiều người cùng làm:
+
+- **Feature ID = số issue GitHub** → branch `NNN-<slug>` (zero-pad ≥ 3 chữ số, VD `042-user-reservation`).
+  Số issue duy nhất toàn cục → không trùng khi chạy song song.
+- **1 người sở hữu 1 feature** end-to-end; branch ngắn hạn; PR `Closes #<issue>`; merge khi CI xanh + review pass.
+- **Glossary + constitution** là file dùng chung → chỉ sửa qua **PR riêng được steward (code-owner) duyệt**.
+- **Rebase `main` thường xuyên**; khi constitution/glossary đổi → chạy lại `/speckit.analyze` để bắt drift.
+
+**2 việc setup thủ công (bắt buộc để cơ chế có hiệu lực):**
+1. Sửa `.github/CODEOWNERS`: thay `@your-lead-handle` bằng GitHub handle thật của steward.
+2. Bật **branch protection** cho `main`: *Require PR review* + *Require review from Code Owners*
+   + *Require status checks* (`template-smoke-test`) + *Require branches up to date*.
+
+📖 Chi tiết đầy đủ (vòng đời feature, bảng điểm nóng conflict, xử lý cập nhật design giữa chừng):
+[`docs/TEAM-WORKFLOW.md`](docs/TEAM-WORKFLOW.md).
+
 ## Yêu cầu môi trường
 
 - Claude Code (bản mới nhất, hỗ trợ subagent + command + settings.json)
