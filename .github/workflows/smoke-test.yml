@@ -21,7 +21,8 @@ jobs:
           test -f .claude/commands/design-to-code.md
           test -f docs/00-glossary.md
           test -f docs/CONSTITUTION_APPEND.md
-          test -f plugin/plugin.json
+          test -f .claude-plugin/plugin.json
+          test -f .claude-plugin/marketplace.json
           echo "✓ Cấu trúc template hợp lệ"
 
       - name: Kiểm tra bootstrap.sh chạy được (dry run)
@@ -30,5 +31,6 @@ jobs:
       - name: Kiểm tra JSON hợp lệ
         run: |
           python3 -c "import json; json.load(open('.claude/settings.json'))"
-          python3 -c "import json; json.load(open('plugin/plugin.json'))"
+          python3 -c "import json; json.load(open('.claude-plugin/plugin.json'))"
+          python3 -c "import json; json.load(open('.claude-plugin/marketplace.json'))"
           echo "✓ JSON hợp lệ"
