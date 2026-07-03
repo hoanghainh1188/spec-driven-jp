@@ -72,10 +72,40 @@ Sau khi chạy `bootstrap.sh`, thêm:
 
 ## Workflow cho 1 feature
 
-1. `git checkout -b 001-<feature-slug>` — Spec Kit dùng tên branch để phát hiện feature.
-2. Đặt tài liệu vào `docs/01-basic-design/<feature>/`, `docs/02-detail-design/<feature>/`.
-3. Link Figma vào `docs/03-ui/<feature>/figma-links.md`.
-4. Gõ `/design-to-code` trong Claude Code — command điều phối toàn bộ pipeline, dừng xin xác nhận ở các checkpoint quan trọng.
+### Bước bạn thao tác
+1. **Đặt tài liệu nguồn** (không sửa nội dung gốc):
+   - `docs/01-basic-design/<feature>/` — 基本設計
+   - `docs/02-detail-design/<feature>/` — 詳細設計
+   - `docs/03-ui/<feature>/figma-links.md` — link Figma + snapshot
+2. **Gõ `/design-to-code`** trong Claude Code, cung cấp đường dẫn tài liệu + link Figma khi được hỏi.
+3. Ở mỗi bước **[HANDOFF]**, copy lệnh `/speckit.*` mà Claude in ra, tự dán chạy, rồi báo lại.
+4. Duyệt ở mỗi **[DỪNG]** (review intake, analyze, test gate, deploy).
+
+### `/design-to-code` là runbook điều phối
+Nó **không tự chạy được** các slash command `/speckit.*` (Claude Code không cho command gọi
+command). Vì vậy có 2 loại bước:
+
+| Loại | Ai làm | Gồm |
+|------|--------|-----|
+| **[TỰ CHẠY]** | Claude tự làm | tạo git branch, gọi subagent `design-intake` + `code-reviewer` |
+| **[HANDOFF]** | **Bạn tự dán lệnh** | Claude in `/speckit.x …`, bạn chạy rồi báo xong |
+
+Trình tự đầy đủ:
+
+1. `[TỰ CHẠY]` tạo branch `NNN-<feature-slug>` (Spec Kit dùng tên branch để phát hiện feature)
+2. `[TỰ CHẠY]` `design-intake` đọc tài liệu → sinh `docs/intake/<feature>.md`
+3. **[DỪNG]** bạn review file intake (prompt + ambiguities)
+4. `[HANDOFF]` `/speckit.specify <prompt từ intake>`
+5. `[HANDOFF]` `/speckit.clarify` (nếu có mâu thuẫn) → câu trả lời ghi vào `docs/04-decisions/`
+6. `[HANDOFF]` `/speckit.plan`
+7. `[HANDOFF]` `/speckit.tasks`
+8. **[DỪNG]** `/speckit.analyze` → sửa spec/plan/tasks nếu có cảnh báo trước khi implement
+9. `[HANDOFF]` `/speckit.implement` → sinh code thật
+10. `[TỰ CHẠY]` `code-reviewer` đối chiếu code với constitution + spec + plan + tasks → xử lý mọi **Blocking**
+11. **[DỪNG] Test gate** — `npm run lint/test/build` phải xanh
+12. **[DỪNG] Deploy** — theo phương thức khai trong mục `## Deploy` của `CLAUDE.md`
+
+Cuối cùng, commit `docs/intake/`, `docs/04-decisions/`, `specs/<feature>/` làm bằng chứng traceability.
 
 ## Yêu cầu môi trường
 
