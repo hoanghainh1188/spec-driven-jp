@@ -50,3 +50,11 @@ Nếu để trống, pipeline sẽ dừng và hỏi bạn trước khi deploy.>
    không được tự chọn 1 bên và im lặng.
 2. Mọi câu trả lời cho clarify phải được ghi vào `docs/04-decisions/`, không chỉ trả lời miệng trong chat.
 3. `docs/intake/` và `specs/` được commit vào Git — bằng chứng agent đã hiểu đúng design tại thời điểm code được viết.
+4. **Feature ID = số issue GitHub.** Branch đặt tên `NNN-<slug>` với `NNN` = số issue zero-pad tối thiểu
+   3 chữ số (VD issue #42 → `042-user-reservation`). Không tự chọn số → tránh trùng khi nhiều người làm.
+5. **Gác cổng file dùng chung:** `docs/00-glossary.md` và `.specify/memory/constitution.md` chỉ được đổi
+   qua **PR riêng** được steward (code-owner) duyệt — không nhét chung vào PR feature.
+6. **Chống lệch ngữ cảnh:** sync `main` trước khi bắt đầu feature; khi constitution/glossary vừa đổi trên
+   `main`, rebase và **chạy lại `/speckit.analyze`** để bắt drift.
+
+> Làm việc nhóm (nhiều người/1 dự án): xem đầy đủ ở [`docs/TEAM-WORKFLOW.md`](docs/TEAM-WORKFLOW.md).

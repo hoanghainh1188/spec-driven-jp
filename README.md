@@ -73,13 +73,18 @@ Sau khi chạy `bootstrap.sh`, thêm:
 ## Workflow cho 1 feature
 
 ### Bước bạn thao tác
-1. **Đặt tài liệu nguồn** (không sửa nội dung gốc):
+1. **Tạo GitHub issue** cho feature (số issue = ID feature), rồi tạo branch `NNN-<slug>` với
+   `NNN` = số issue zero-pad ≥ 3 chữ số (VD issue #42 → `042-user-reservation`).
+2. **Đặt tài liệu nguồn** (không sửa nội dung gốc):
    - `docs/01-basic-design/<feature>/` — 基本設計
    - `docs/02-detail-design/<feature>/` — 詳細設計
    - `docs/03-ui/<feature>/figma-links.md` — link Figma + snapshot
-2. **Gõ `/design-to-code`** trong Claude Code, cung cấp đường dẫn tài liệu + link Figma khi được hỏi.
-3. Ở mỗi bước **[HANDOFF]**, copy lệnh `/speckit.*` mà Claude in ra, tự dán chạy, rồi báo lại.
-4. Duyệt ở mỗi **[DỪNG]** (review intake, analyze, test gate, deploy).
+3. **Gõ `/design-to-code`** trong Claude Code, cung cấp đường dẫn tài liệu + link Figma khi được hỏi.
+4. Ở mỗi bước **[HANDOFF]**, copy lệnh `/speckit.*` mà Claude in ra, tự dán chạy, rồi báo lại.
+5. Duyệt ở mỗi **[DỪNG]** (review intake, analyze, test gate, deploy).
+
+> **Nhiều người cùng làm 1 dự án?** Xem [`docs/TEAM-WORKFLOW.md`](docs/TEAM-WORKFLOW.md) — quy ước
+> đánh số theo issue, branch/PR model, gác cổng glossary + constitution, và cách tránh conflict/lệch ngữ cảnh.
 
 ### Sơ đồ workflow
 
