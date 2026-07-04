@@ -72,6 +72,31 @@ PY
   fi
 fi
 
+# ==> Drift guard: template LUÔN dùng spec-kit mới nhất (bootstrap kéo thẳng main), nên tên/cấu trúc
+#     skill có thể đổi giữa các bản. Kiểm các skill mà runbook /design-to-code tham chiếu có thật
+#     không — báo sớm ngay lúc setup thay vì để user gặp "lệnh không tồn tại" giữa pipeline.
+if [ -d .specify ]; then
+  REFERENCED_SKILLS="constitution specify clarify plan tasks analyze implement"
+  missing=""
+  for s in $REFERENCED_SKILLS; do
+    [ -e ".claude/skills/speckit-$s" ] || missing="$missing speckit-$s"
+  done
+  if [ -n "$missing" ]; then
+    echo ""
+    echo "⚠️  ================= CẢNH BÁO DRIFT SPEC KIT ================="
+    echo "    Không thấy skill:$missing trong .claude/skills/"
+    echo "    Bản spec-kit mới có thể đã ĐỔI TÊN / CẤU TRÚC skill."
+    echo "    → Xem thực tế: ls .claude/skills/"
+    echo "    → Cập nhật tên lệnh /speckit-* trong runbook cho khớp:"
+    echo "      .claude/commands/design-to-code.md, README.md, CLAUDE.md, docs/*"
+    echo "    Runbook đang giả định: /speckit-{constitution,specify,clarify,plan,tasks,analyze,implement}"
+    echo "    =========================================================="
+    echo ""
+  else
+    echo "==> Drift check OK: 7 skill /speckit-* runbook tham chiếu đều có mặt trong .claude/skills/."
+  fi
+fi
+
 echo ""
 echo "==> Bootstrap xong."
 echo ""
