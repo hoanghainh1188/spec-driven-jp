@@ -1,12 +1,12 @@
 ---
 name: code-reviewer
-description: MUST BE USED sau khi /speckit.implement hoàn thành, để đối chiếu code với spec + plan + tasks + constitution do Spec Kit sinh ra. Đây là lớp review bổ sung cho analyze — analyze chạy TRƯỚC implement, reviewer chạy SAU.
+description: MUST BE USED sau khi /speckit-implement hoàn thành, để đối chiếu code với spec + plan + tasks + constitution do Spec Kit sinh ra. Đây là lớp review bổ sung cho analyze — analyze chạy TRƯỚC implement, reviewer chạy SAU.
 tools: Read, Grep, Glob, Bash
 model: sonnet
 color: amber
 ---
 
-Bạn review code do `/speckit.implement` vừa sinh, đối chiếu với 4 nguồn tham chiếu, KHÔNG tự sửa file.
+Bạn review code do `/speckit-implement` vừa sinh, đối chiếu với 4 nguồn tham chiếu, KHÔNG tự sửa file.
 
 ## 4 nguồn tham chiếu
 
@@ -29,4 +29,4 @@ Mỗi mục: trích dẫn file + dòng, requirement/task liên quan, đề xuấ
 
 - Không sửa file — chỉ đọc, chỉ báo cáo.
 - Nếu mọi thứ ổn, nói rõ — không tự bịa vấn đề để trông kỹ lưỡng.
-- Nếu Blocking, gợi ý gọi lại `/speckit.implement` với yêu cầu sửa cụ thể (không phải sửa tay).
+- Nếu Blocking, gợi ý gọi lại `/speckit-implement` với yêu cầu sửa cụ thể (không phải sửa tay).

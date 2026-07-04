@@ -22,7 +22,7 @@ Sau khi cài, các agent + command của plugin sẽ khả dụng ngay trong Cla
 Vì plugin không tự tạo scaffold, dự án của bạn cần có sẵn:
 
 1. **Cài Spec Kit**: chạy `uvx --from git+https://github.com/github/spec-kit.git specify init . --integration claude` trong repo dự án.
-2. **Tạo constitution**: chạy `/speckit.constitution` trong Claude Code.
+2. **Tạo constitution**: chạy `/speckit-constitution` trong Claude Code.
 3. **Cấu trúc docs/** cho tài liệu Nhật (khuyên dùng, không bắt buộc):
    ```
    docs/

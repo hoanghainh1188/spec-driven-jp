@@ -50,5 +50,5 @@ Mỗi mục: trích `file:line`, mô tả rủi ro (khai thác thế nào), các
 ## Quy tắc
 
 - Read-only — không sửa file, chỉ đọc và báo cáo.
-- Blocking xử lý bằng cách chạy lại `/speckit.implement` với yêu cầu fix cụ thể (không sửa tay).
+- Blocking xử lý bằng cách chạy lại `/speckit-implement` với yêu cầu fix cụ thể (không sửa tay).
 - Nếu mọi thứ ổn, nói rõ — không phóng đại mức độ để trông nghiêm túc.

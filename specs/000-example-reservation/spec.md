@@ -1,5 +1,5 @@
 > ⚠️ **SPEC MẪU — XOÁ TRƯỚC KHI DÙNG THẬT.**
-> File này *bình thường do `/speckit.specify` sinh ra*, không viết tay. Đây chỉ là ví dụ rút gọn để
+> File này *bình thường do `/speckit-specify` sinh ra*, không viết tay. Đây chỉ là ví dụ rút gọn để
 > minh hoạ hình hài output + chuỗi traceability. Xoá cả thư mục `specs/000-example-reservation/`.
 
 # Spec — 予約承認 (Duyệt đặt chỗ)

@@ -1,6 +1,6 @@
-# Quyết định — lưu câu trả lời từ /speckit.clarify
+# Quyết định — lưu câu trả lời từ /speckit-clarify
 
-Mỗi lần /speckit.clarify giải quyết 1 ambiguity, ghi lại tại đây theo format:
+Mỗi lần /speckit-clarify giải quyết 1 ambiguity, ghi lại tại đây theo format:
 docs/04-decisions/<YYYY-MM-DD>-<slug>.md
 
 ## Template

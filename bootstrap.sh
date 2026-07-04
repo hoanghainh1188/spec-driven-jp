@@ -48,7 +48,7 @@ else
 fi
 
 # ==> Chốt cơ chế đánh số feature = timestamp (chống trùng khi nhiều người chạy song song).
-#     /speckit.specify sẽ sinh specs/<YYYYMMDD-HHMMSS>-<slug> — duy nhất toàn cục, không quét specs/.
+#     /speckit-specify sẽ sinh specs/<YYYYMMDD-HHMMSS>-<slug> — duy nhất toàn cục, không quét specs/.
 #     (Tên branch vẫn là NNN-<slug> = số issue, cho PR/traceability — 2 lớp số khác nhau.)
 if [ -d .specify ]; then
   if command -v python3 >/dev/null 2>&1; then
@@ -77,7 +77,7 @@ echo "==> Bootstrap xong."
 echo ""
 echo "Bước tiếp theo:"
 echo "  1. Mở dự án trong Claude Code."
-echo "  2. Chạy /speckit.constitution để tạo constitution.md lần đầu."
+echo "  2. Chạy /speckit-constitution để tạo constitution.md lần đầu."
 echo "     Sau đó xem docs/CONSTITUTION_APPEND.md và cân nhắc bổ sung 3 article cho bối cảnh Nhật."
 echo "  3. Cập nhật docs/00-glossary.md với thuật ngữ nghiệp vụ của dự án."
 echo "  4. Với feature đầu tiên:"

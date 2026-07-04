@@ -12,14 +12,14 @@
 - Figma: `docs/03-ui/example-reservation/figma-links.md` — node `123:456` *(giả định)*
 - Đã tra `docs/00-glossary.md`: 予約 → reservation, 承認 → approval, 担当者 → assignee.
 
-## Prompt for /speckit.specify
+## Prompt for /speckit-specify
 Xây màn hình cho **担当者 (assignee — người phụ trách)** duyệt một **予約 (reservation — đặt chỗ)**
 đang ở trạng thái chờ. Người phụ trách xem danh sách reservation `pending`, mở chi tiết, rồi thực
 hiện **承認 (approval — phê duyệt)** hoặc từ chối kèm lý do. Sau khi approval, reservation chuyển
 trạng thái `approved`, gửi thông báo cho 顧客 (customer — khách hàng). Chỉ 担当者 được gán cho
 reservation đó mới được approval (không cho người khác duyệt hộ).
 
-## Ambiguities to raise in /speckit.clarify
+## Ambiguities to raise in /speckit-clarify
 1. Basic design nói "gửi thông báo" nhưng không rõ kênh (email / in-app / cả hai) — detail design bỏ trống.
 2. Reservation bị từ chối có cho gửi lại (re-submit) không? Figma có nút "再申請" nhưng detail design không mô tả luồng.
 

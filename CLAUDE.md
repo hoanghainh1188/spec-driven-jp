@@ -21,7 +21,7 @@ giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
   liên quan nghiệp vụ. Gặp thuật ngữ mới → **append** vào đây trước khi đặt tên (được làm ngay trong branch
   feature, xem rule 5), không tự dịch rồi bỏ qua.
 
-- **`docs/04-decisions/`** — nơi lưu câu trả lời cho mọi ambiguity mà `/speckit.clarify` từng giải quyết.
+- **`docs/04-decisions/`** — nơi lưu câu trả lời cho mọi ambiguity mà `/speckit-clarify` từng giải quyết.
   Trước khi hỏi lại 1 câu đã có trong đây, agent phải tra cứu trước.
 
 - **`docs/intake/`** — output của subagent `design-intake`. Đây là cầu nối giữa tài liệu Nhật/Figma và Spec Kit.
@@ -37,9 +37,9 @@ giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
 Gõ `/design-to-code` trong Claude Code, cung cấp đường dẫn tài liệu và link Figma khi được hỏi.
 
 **Mô hình chạy:** `/design-to-code` là một *runbook điều phối*, KHÔNG tự gọi được các slash command
-`/speckit.*` (Claude Code không cho command gọi command). Vì vậy:
+`/speckit-*` (Claude Code không cho command gọi command). Vì vậy:
 - Bước dùng **subagent** (`design-intake`, `code-reviewer`) → command tự gọi qua Task tool.
-- Bước dùng **Spec Kit** (`/speckit.specify|clarify|plan|tasks|analyze|implement`) → command in ra
+- Bước dùng **Spec Kit** (`/speckit-specify|clarify|plan|tasks|analyze|implement`) → command in ra
   lệnh chính xác để **bạn tự dán và chạy**, rồi dừng chờ bạn báo xong.
 
 Trình tự: design-intake → [handoff] specify → clarify → plan → tasks → analyze → implement
@@ -52,7 +52,7 @@ Ví dụ: `vercel --prod`, hoặc push lên branch trigger CI/CD, hoặc build c
 Nếu để trống, pipeline sẽ dừng và hỏi bạn trước khi deploy.>
 
 ## Quy tắc bắt buộc
-1. Mọi mâu thuẫn giữa basic design / detail design / Figma phải được nêu vào `/speckit.clarify`,
+1. Mọi mâu thuẫn giữa basic design / detail design / Figma phải được nêu vào `/speckit-clarify`,
    không được tự chọn 1 bên và im lặng.
 2. Mọi câu trả lời cho clarify phải được ghi vào `docs/04-decisions/`, không chỉ trả lời miệng trong chat.
 3. `docs/intake/` và `specs/` được commit vào Git — bằng chứng agent đã hiểu đúng design tại thời điểm code được viết.
@@ -67,6 +67,6 @@ Nếu để trống, pipeline sẽ dừng và hỏi bạn trước khi deploy.>
    - **THÊM thuật ngữ mới** (append 1 dòng) vào `docs/00-glossary.md` → **được làm ngay trong branch
      feature**; CODEOWNERS sẽ tự kéo steward review phần glossary khi mở PR. Không bị chặn giữa dòng.
 6. **Chống lệch ngữ cảnh:** sync `main` trước khi bắt đầu feature; khi constitution/glossary vừa đổi trên
-   `main`, rebase và **chạy lại `/speckit.analyze`** để bắt drift.
+   `main`, rebase và **chạy lại `/speckit-analyze`** để bắt drift.
 
 > Làm việc nhóm (nhiều người/1 dự án): xem đầy đủ ở [`docs/TEAM-WORKFLOW.md`](docs/TEAM-WORKFLOW.md).
