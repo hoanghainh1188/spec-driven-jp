@@ -94,10 +94,13 @@ rm -rf specs/000-example-reservation \
 ### Bước bạn thao tác
 1. **Tạo GitHub issue** cho feature (số issue = ID feature), rồi tạo branch `NNN-<slug>` với
    `NNN` = số issue zero-pad ≥ 3 chữ số (VD issue #42 → `042-user-reservation`).
-2. **Đặt tài liệu nguồn** (không sửa nội dung gốc):
-   - `docs/01-basic-design/<feature>/` — 基本設計
-   - `docs/02-detail-design/<feature>/` — 詳細設計
+2. **Đặt tài liệu nguồn** (không sửa nội dung gốc), mỗi feature 1 thư mục:
+   - `docs/01-basic-design/<feature>/` — 基本設計 (user story / behavior)
+   - `docs/02-detail-design/<feature>/` — 詳細設計 (bảng field + validation, business rule / edge / error)
    - `docs/03-ui/<feature>/figma-links.md` — link Figma + snapshot
+   > ⚠️ `Read` không parse `.docx/.xlsx/.pdf` nhị phân — kèm **bản export text/markdown** cạnh file gốc
+   > (hoặc cài Skill `docx/xlsx/pdf`). Cấu trúc + checklist nội dung đầy đủ: xem `README.md` trong từng
+   > thư mục `docs/01-03`.
 3. **Gõ `/design-to-code`** trong Claude Code, cung cấp đường dẫn tài liệu + link Figma khi được hỏi.
 4. Ở mỗi bước **[HANDOFF]**, copy lệnh `/speckit-*` mà Claude in ra, tự dán chạy, rồi báo lại.
 5. Duyệt ở mỗi **[DỪNG]** (review intake, analyze, test gate, deploy).
