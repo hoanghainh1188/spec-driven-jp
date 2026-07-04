@@ -57,6 +57,8 @@ Nếu để trống, pipeline sẽ dừng và hỏi bạn trước khi deploy.>
 3. `docs/intake/` và `specs/` được commit vào Git — bằng chứng agent đã hiểu đúng design tại thời điểm code được viết.
 4. **Feature ID = số issue GitHub.** Branch đặt tên `NNN-<slug>` với `NNN` = số issue zero-pad tối thiểu
    3 chữ số (VD issue #42 → `042-user-reservation`). Không tự chọn số → tránh trùng khi nhiều người làm.
+   (Thư mục `specs/` do Spec Kit sinh dùng tiền tố **timestamp** — bootstrap cấu hình sẵn; 2 lớp số
+   không cần khớp, xem `docs/TEAM-WORKFLOW.md` mục 2.)
 5. **Gác cổng file dùng chung:** `docs/00-glossary.md` và `.specify/memory/constitution.md` chỉ được đổi
    qua **PR riêng** được steward (code-owner) duyệt — không nhét chung vào PR feature.
 6. **Chống lệch ngữ cảnh:** sync `main` trước khi bắt đầu feature; khi constitution/glossary vừa đổi trên
