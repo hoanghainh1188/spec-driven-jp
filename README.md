@@ -112,7 +112,7 @@ flowchart TD
     M -- Không --> Q["glossary-steward<br/>đối chiếu term vs glossary"]:::auto
     Q --> R{"security-reviewer<br/>(nếu đụng data/auth)<br/>còn Blocking?"}:::auto
     R -- Có --> L
-    R -- Không --> N{"DỪNG — test gate<br/>lint/test/build xanh?"}:::stop
+    R -- Không --> N{"DỪNG — test gate<br/>lint/test/build xanh<br/>+ coverage ≥ ngưỡng?"}:::stop
     N -- Đỏ --> L
     N -- Xanh --> O["DỪNG — deploy theo CLAUDE.md"]:::stop
     O --> P["✅ Commit intake + decisions + specs"]:::user
@@ -149,7 +149,7 @@ Trình tự đầy đủ:
 10. `[TỰ CHẠY]` `code-reviewer` đối chiếu code với constitution + spec + plan + tasks → xử lý mọi **Blocking**
 11. `[TỰ CHẠY]` `glossary-steward` đối chiếu term code/spec vs `docs/00-glossary.md` → sửa term lệch (term mới đề xuất PR glossary riêng)
 12. `[TỰ CHẠY]` `security-reviewer` soi OWASP + secret + PII (chỉ khi feature đụng data/auth/API; nếu không thì tự SKIP) → xử lý mọi **Blocking**
-13. **[DỪNG] Test gate** — format tự chạy qua hook `.claude/hooks/format.sh`; verify `npm run lint/test/build` phải xanh
+13. **[DỪNG] Test gate** — format tự chạy qua hook `.claude/hooks/format.sh`; verify `npm run lint/test/build` phải xanh **và coverage đạt ngưỡng constitution** (Article W — mặc định ≥ 80% business logic)
 14. **[DỪNG] Deploy** — theo phương thức khai trong mục `## Deploy` của `CLAUDE.md`
 
 Cuối cùng, commit `docs/intake/`, `docs/04-decisions/`, `specs/<feature>/` làm bằng chứng traceability.

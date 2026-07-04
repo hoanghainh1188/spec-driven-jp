@@ -13,7 +13,9 @@ Closes #<!-- số issue = feature ID -->
 
 ## Chất lượng
 - [ ] Đã chạy subagent `code-reviewer`, xử lý hết mục **Blocking**
+- [ ] Đã chạy `glossary-steward` (term lệch đã sửa) và `security-reviewer` (nếu feature đụng data/auth/API)
 - [ ] Test gate xanh: `npm run lint` / `test` / `build` (hoặc tương đương của dự án)
+- [ ] Coverage đạt ngưỡng constitution (Article W — mặc định ≥ 80% business logic)
 - [ ] CI `template-smoke-test` (và CI dự án) xanh
 
 ## File dùng chung (gác cổng)
