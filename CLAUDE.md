@@ -7,6 +7,10 @@
 <Điền khi bắt đầu code — mặc dù `impl-planner` của Spec Kit sẽ tự phát hiện, khai báo sẵn ở đây
 giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
 
+> Khi đã chốt stack: điền lệnh formatter vào `.claude/hooks/format.sh` để bật format-on-save
+> (PostToolUse hook chạy sau mỗi Edit/Write). Thứ tự chuẩn: format → lint → type check → build
+> (lint/test/build chạy ở Test gate của `/design-to-code`).
+
 ## Cấu trúc và ý nghĩa từng phần
 
 - **`docs/01-basic-design/`, `docs/02-detail-design/`, `docs/03-ui/`** — nguồn sự thật GỐC từ khách hàng.
@@ -38,10 +42,11 @@ Gõ `/design-to-code` trong Claude Code, cung cấp đường dẫn tài liệu 
   lệnh chính xác để **bạn tự dán và chạy**, rồi dừng chờ bạn báo xong.
 
 Trình tự: design-intake → [handoff] specify → clarify → plan → tasks → analyze → implement
-→ code-reviewer → **test gate** → **deploy**. Dừng xin xác nhận ở mọi checkpoint.
+→ code-reviewer → glossary-steward → security-reviewer → **test gate** → **deploy**.
+Dừng xin xác nhận ở mọi checkpoint.
 
 ## Deploy
-<Điền phương thức deploy cụ thể của dự án — `/design-to-code` bước 12 sẽ đọc mục này.
+<Điền phương thức deploy cụ thể của dự án — `/design-to-code` bước 14 sẽ đọc mục này.
 Ví dụ: `vercel --prod`, hoặc push lên branch trigger CI/CD, hoặc build container + đẩy registry.
 Nếu để trống, pipeline sẽ dừng và hỏi bạn trước khi deploy.>
 

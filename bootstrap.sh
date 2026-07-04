@@ -37,8 +37,9 @@ else
   # Merge lại: nếu specify init ghi đè settings.json / agents / commands của template,
   # khôi phục từ backup rồi merge command speckit.* vào
   if [ -d .claude.template-backup ]; then
-    # Giữ nguyên agents và settings của template
+    # Giữ nguyên agents, hooks và settings của template
     cp -r .claude.template-backup/agents/* .claude/agents/ 2>/dev/null || true
+    mkdir -p .claude/hooks && cp -r .claude.template-backup/hooks/* .claude/hooks/ 2>/dev/null || true
     cp .claude.template-backup/settings.json .claude/settings.json 2>/dev/null || true
     # Command của template (design-to-code) không bị Spec Kit đụng tới, nhưng copy lại cho chắc
     cp .claude.template-backup/commands/design-to-code.md .claude/commands/ 2>/dev/null || true

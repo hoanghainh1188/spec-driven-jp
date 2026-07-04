@@ -37,5 +37,19 @@
       "Bash(git reset --hard *)"
     ],
     "defaultMode": "plan"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/format.sh",
+            "description": "Format file vừa sửa theo formatter của dự án (điền lệnh trong .claude/hooks/format.sh)"
+          }
+        ]
+      }
+    ]
   }
 }

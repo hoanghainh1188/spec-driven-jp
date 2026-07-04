@@ -4,7 +4,7 @@ Template cho các dự án greenfield dùng Claude Code, đặc biệt phù hợ
 
 Tích hợp:
 - **[GitHub Spec Kit](https://github.com/github/spec-kit)** làm khung xương spec-driven (constitution + specify → clarify → plan → tasks → analyze → implement)
-- **2 subagent chuyên biệt** bù đắp phần Spec Kit không có: `design-intake` (đọc tài liệu Nhật + Figma qua MCP) và `code-reviewer` (đối chiếu code với 4 nguồn sau khi implement)
+- **4 subagent chuyên biệt** bù đắp phần Spec Kit không có: `design-intake` (đọc tài liệu Nhật + Figma qua MCP), `code-reviewer` (đối chiếu code với 4 nguồn sau khi implement), `security-reviewer` (pass bảo mật OWASP + secret + PII), và `glossary-steward` (gác nhất quán thuật ngữ Nhật-Việt-Anh)
 - **Glossary Nhật-Việt-Anh** làm nguồn thuật ngữ chung
 - **Permission gate** cấu hình sẵn theo nguyên tắc deny → ask → allow
 
@@ -28,7 +28,7 @@ Cách này phù hợp khi bạn muốn dùng bộ agent + command cho **nhiều 
 /plugin install spec-driven-jp@hoanghainh1188
 ```
 
-Plugin sẽ cài `.claude/agents/design-intake.md`, `.claude/agents/code-reviewer.md`, và command `/design-to-code` vào user scope (`~/.claude/`). Xem chi tiết ở `plugin/README.md`.
+Plugin sẽ cài 4 agent (`design-intake`, `code-reviewer`, `security-reviewer`, `glossary-steward`) và command `/design-to-code` vào user scope (`~/.claude/`). Xem chi tiết ở `plugin/README.md`.
 
 **Lưu ý**: cách plugin không tự tạo cấu trúc `docs/` hay chạy `specify init` — bạn cần làm những bước đó thủ công nếu dự án chưa có sẵn. Cách 1 (template repo) tự động hóa cả 2.
 
@@ -42,7 +42,11 @@ Plugin sẽ cài `.claude/agents/design-intake.md`, `.claude/agents/code-reviewe
 │   ├── settings.json              Permission deny/ask/allow đã cấu hình sẵn
 │   ├── agents/
 │   │   ├── design-intake.md       Đọc docs Nhật + Figma, sinh input cho /speckit.specify
-│   │   └── code-reviewer.md       Review code sau /speckit.implement
+│   │   ├── code-reviewer.md       Review code sau /speckit.implement
+│   │   ├── security-reviewer.md   Pass bảo mật OWASP + secret + PII sau code-reviewer
+│   │   └── glossary-steward.md    Gác nhất quán thuật ngữ Nhật-Việt-Anh (pipeline + standalone)
+│   ├── hooks/
+│   │   └── format.sh              Format-on-save hook (điền formatter theo stack)
 │   └── commands/
 │       └── design-to-code.md      Điều phối toàn bộ pipeline hybrid
 ├── docs/
@@ -105,7 +109,10 @@ flowchart TD
     K -- Không --> L["/speckit.implement → sinh code"]:::handoff
     L --> M{"code-reviewer<br/>còn Blocking?"}:::auto
     M -- Có --> L
-    M -- Không --> N{"DỪNG — test gate<br/>lint/test/build xanh?"}:::stop
+    M -- Không --> Q["glossary-steward<br/>đối chiếu term vs glossary"]:::auto
+    Q --> R{"security-reviewer<br/>(nếu đụng data/auth)<br/>còn Blocking?"}:::auto
+    R -- Có --> L
+    R -- Không --> N{"DỪNG — test gate<br/>lint/test/build xanh?"}:::stop
     N -- Đỏ --> L
     N -- Xanh --> O["DỪNG — deploy theo CLAUDE.md"]:::stop
     O --> P["✅ Commit intake + decisions + specs"]:::user
@@ -125,7 +132,7 @@ command). Vì vậy có 2 loại bước:
 
 | Loại | Ai làm | Gồm |
 |------|--------|-----|
-| **[TỰ CHẠY]** | Claude tự làm | tạo git branch, gọi subagent `design-intake` + `code-reviewer` |
+| **[TỰ CHẠY]** | Claude tự làm | tạo git branch, gọi subagent `design-intake`, `code-reviewer`, `glossary-steward`, `security-reviewer` |
 | **[HANDOFF]** | **Bạn tự dán lệnh** | Claude in `/speckit.x …`, bạn chạy rồi báo xong |
 
 Trình tự đầy đủ:
@@ -140,8 +147,10 @@ Trình tự đầy đủ:
 8. **[DỪNG]** `/speckit.analyze` → sửa spec/plan/tasks nếu có cảnh báo trước khi implement
 9. `[HANDOFF]` `/speckit.implement` → sinh code thật
 10. `[TỰ CHẠY]` `code-reviewer` đối chiếu code với constitution + spec + plan + tasks → xử lý mọi **Blocking**
-11. **[DỪNG] Test gate** — `npm run lint/test/build` phải xanh
-12. **[DỪNG] Deploy** — theo phương thức khai trong mục `## Deploy` của `CLAUDE.md`
+11. `[TỰ CHẠY]` `glossary-steward` đối chiếu term code/spec vs `docs/00-glossary.md` → sửa term lệch (term mới đề xuất PR glossary riêng)
+12. `[TỰ CHẠY]` `security-reviewer` soi OWASP + secret + PII (chỉ khi feature đụng data/auth/API; nếu không thì tự SKIP) → xử lý mọi **Blocking**
+13. **[DỪNG] Test gate** — format tự chạy qua hook `.claude/hooks/format.sh`; verify `npm run lint/test/build` phải xanh
+14. **[DỪNG] Deploy** — theo phương thức khai trong mục `## Deploy` của `CLAUDE.md`
 
 Cuối cùng, commit `docs/intake/`, `docs/04-decisions/`, `specs/<feature>/` làm bằng chứng traceability.
 
