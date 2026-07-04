@@ -26,7 +26,11 @@ jobs:
           test -f docs/CONSTITUTION_APPEND.md
           test -f .claude-plugin/plugin.json
           test -f .claude-plugin/marketplace.json
+          test -f .github/scripts/check-template.py
           echo "✓ Cấu trúc template hợp lệ"
+
+      - name: Kiểm tra nội dung template (link/frontmatter/step/mermaid)
+        run: python3 .github/scripts/check-template.py
 
       - name: Kiểm tra shell script hợp lệ (dry run)
         run: |

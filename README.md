@@ -74,6 +74,21 @@ Sau khi chạy `bootstrap.sh`, thêm:
 └── specs/                          Do Spec Kit sinh mỗi feature 1 thư mục
 ```
 
+## Feature mẫu để tham khảo (xoá được)
+
+Template kèm 1 feature mẫu tí hon — **予約承認 (duyệt đặt chỗ)** — để bạn thấy chuỗi traceability
+thật trông thế nào trước khi tự chạy (dùng đường dẫn dạng code để xoá xong không để lại link chết):
+- `docs/intake/000-example-reservation.md` — output mẫu của `design-intake`
+- `docs/04-decisions/2026-01-01-approval-vs-confirm.md` — quyết định clarify mẫu
+- `specs/000-example-reservation/spec.md` — spec mẫu (bình thường do Spec Kit sinh)
+
+**Xoá trước khi làm dự án thật:**
+```bash
+rm -rf specs/000-example-reservation \
+       docs/intake/000-example-reservation.md \
+       docs/04-decisions/2026-01-01-approval-vs-confirm.md
+```
+
 ## Workflow cho 1 feature
 
 ### Bước bạn thao tác
