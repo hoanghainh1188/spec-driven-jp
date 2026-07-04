@@ -23,6 +23,10 @@ reservation đó mới được approval (không cho người khác duyệt hộ
 1. Basic design nói "gửi thông báo" nhưng không rõ kênh (email / in-app / cả hai) — detail design bỏ trống.
 2. Reservation bị từ chối có cho gửi lại (re-submit) không? Figma có nút "再申請" nhưng detail design không mô tả luồng.
 
+## Thuật ngữ mới (append vào glossary)
+Không có — 予約 / 承認 / 担当者 / 顧客 đều đã có trong `docs/00-glossary.md`. (Nếu có term mới, liệt kê
+ở đây kèm gợi ý dịch để append thẳng vào glossary trong branch feature.)
+
 ## Suggested constitution amendments
 - Cân nhắc article: "Mọi thao tác đổi trạng thái reservation phải kiểm quyền 担当者 được gán" —
   luật chung, nên đưa vào `.specify/memory/constitution.md` thay vì lặp ở từng spec.

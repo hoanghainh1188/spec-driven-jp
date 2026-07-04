@@ -19,8 +19,9 @@ Closes #<!-- số issue = feature ID -->
 - [ ] CI `template-smoke-test` (và CI dự án) xanh
 
 ## File dùng chung (gác cổng)
-- [ ] PR này **không** sửa `docs/00-glossary.md` hay `.specify/memory/constitution.md`
-      → *nếu có sửa, đã tách thành PR riêng và được **code-owner** duyệt (xem `.github/CODEOWNERS`)*
+- [ ] **THÊM** term mới vào `docs/00-glossary.md` (append) — OK để trong PR này; steward (code-owner) review phần glossary
+- [ ] PR này **không SỬA/đổi tên** term đã có, và **không đổi** `.specify/memory/constitution.md`
+      → *nếu có, đã tách thành **PR riêng** được **code-owner** duyệt (xem `.github/CODEOWNERS`)*
 - [ ] Đã rebase lên `main` mới nhất; nếu glossary/constitution vừa đổi → đã chạy lại `/speckit.analyze`
 
 ## Branch

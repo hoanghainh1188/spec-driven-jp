@@ -29,8 +29,10 @@ Bảng:
 Đây là loại phải sửa trước khi đi tiếp.
 
 ### Term nghiệp vụ mới (chưa có trong glossary)
-Liệt kê term + vị trí + **gợi ý** bản dịch Nhật/Việt/Anh để steward cân nhắc. KHÔNG tự thêm vào
-`docs/00-glossary.md` — đề xuất mở **PR glossary riêng** cho steward duyệt.
+Liệt kê term + vị trí + **gợi ý** bản dịch Nhật/Việt/Anh. Đây là loại **THÊM** (append) — người phụ
+trách được append thẳng vào `docs/00-glossary.md` ngay trong branch feature (steward review khi mở PR).
+Bạn (agent) KHÔNG tự sửa glossary — chỉ đề xuất. *Lưu ý:* nếu phát hiện cần **SỬA/đổi tên** term đã
+có (không phải thêm mới), việc đó thuộc diện gác cổng chặt → đề xuất **PR glossary riêng** cho steward.
 
 ## Quy tắc
 

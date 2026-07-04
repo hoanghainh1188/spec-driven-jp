@@ -18,7 +18,8 @@ giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
   CHANGELOG.md, không ghi đè.
 
 - **`docs/00-glossary.md`** — thuật ngữ Nhật-Việt-Anh. Mọi agent PHẢI tra file này trước khi đặt tên biến/field
-  liên quan nghiệp vụ. Nếu gặp thuật ngữ mới, thêm vào đây trước, không tự dịch.
+  liên quan nghiệp vụ. Gặp thuật ngữ mới → **append** vào đây trước khi đặt tên (được làm ngay trong branch
+  feature, xem rule 5), không tự dịch rồi bỏ qua.
 
 - **`docs/04-decisions/`** — nơi lưu câu trả lời cho mọi ambiguity mà `/speckit.clarify` từng giải quyết.
   Trước khi hỏi lại 1 câu đã có trong đây, agent phải tra cứu trước.
@@ -59,8 +60,12 @@ Nếu để trống, pipeline sẽ dừng và hỏi bạn trước khi deploy.>
    3 chữ số (VD issue #42 → `042-user-reservation`). Không tự chọn số → tránh trùng khi nhiều người làm.
    (Thư mục `specs/` do Spec Kit sinh dùng tiền tố **timestamp** — bootstrap cấu hình sẵn; 2 lớp số
    không cần khớp, xem `docs/TEAM-WORKFLOW.md` mục 2.)
-5. **Gác cổng file dùng chung:** `docs/00-glossary.md` và `.specify/memory/constitution.md` chỉ được đổi
-   qua **PR riêng** được steward (code-owner) duyệt — không nhét chung vào PR feature.
+5. **Gác cổng file dùng chung** — phân biệt THÊM và SỬA để không kẹt giữa chừng:
+   - **SỬA/đổi tên/xoá thuật ngữ đã có** trong `docs/00-glossary.md`, và **mọi thay đổi**
+     `.specify/memory/constitution.md` → phải qua **PR riêng** được steward (code-owner) duyệt (blast
+     radius lớn, đụng toàn dự án).
+   - **THÊM thuật ngữ mới** (append 1 dòng) vào `docs/00-glossary.md` → **được làm ngay trong branch
+     feature**; CODEOWNERS sẽ tự kéo steward review phần glossary khi mở PR. Không bị chặn giữa dòng.
 6. **Chống lệch ngữ cảnh:** sync `main` trước khi bắt đầu feature; khi constitution/glossary vừa đổi trên
    `main`, rebase và **chạy lại `/speckit.analyze`** để bắt drift.
 

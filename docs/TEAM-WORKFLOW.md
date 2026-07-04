@@ -85,15 +85,19 @@ Nguồn ngữ cảnh dùng chung: `docs/00-glossary.md`, `.specify/memory/consti
 ## 5. Gác cổng glossary + constitution
 
 `docs/00-glossary.md` và `.specify/memory/constitution.md` là **file dùng chung, tác động toàn dự án**.
-Áp dụng mô hình **gác cổng**:
+Gác cổng **theo mức blast radius**, không chặn cứng mọi thứ (tránh kẹt dev giữa feature):
 
-- Thay đổi 2 file này **tách thành PR riêng, nhỏ** — **không** nhét chung vào PR feature.
-- PR đó phải được **steward (code-owner)** duyệt (xem `.github/CODEOWNERS`).
-- Merge sớm vào `main` để cả team rebase đồng bộ, giảm phân kỳ.
-- Glossary là bảng markdown **append-friendly** (thêm dòng mới ít đụng nhau) — vẫn nên qua steward để
-  tránh trùng/nhầm thuật ngữ.
+| Thao tác | Cách làm | Vì sao |
+|---|---|---|
+| **THÊM** thuật ngữ mới (append 1 dòng glossary) | Làm **ngay trong branch feature**; steward review phần glossary khi mở PR (CODEOWNERS tự kéo) | Append ít đụng nhau; chặn cứng sẽ kẹt dev đang cần đặt tên |
+| **SỬA / đổi tên / xoá** thuật ngữ đã có | **PR riêng, nhỏ**, steward duyệt | Đổi nghĩa 1 term lan ra toàn codebase — rủi ro cao |
+| **Mọi thay đổi** `constitution.md` | **PR riêng, nhỏ**, steward duyệt | Thắng mọi thứ trong Spec Kit — blast radius tối đa |
 
-> Để CODEOWNERS **bắt buộc** duyệt: bật branch protection trên `main` (mục 7).
+- PR gác cổng (SỬA glossary / constitution) merge **sớm** vào `main` để cả team rebase đồng bộ, giảm phân kỳ.
+- Steward khai trong `.github/CODEOWNERS`.
+
+> ⚠️ **CODEOWNERS chỉ là gợi ý cho tới khi bật branch protection.** Nếu chưa bật (mục 7), GitHub
+> **không** bắt buộc steward duyệt — cơ chế gác cổng âm thầm vô hiệu. Đây là bước setup **load-bearing**.
 
 ---
 

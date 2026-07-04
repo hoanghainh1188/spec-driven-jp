@@ -29,7 +29,9 @@ server hoặc sửa dòng `tools:` của agent này cho khớp.
 
 ## Quy trình
 
-1. Tra `docs/00-glossary.md` trước — nếu gặp thuật ngữ chưa có, thêm vào glossary trước khi tiếp tục.
+1. Tra `docs/00-glossary.md` trước. Nếu gặp thuật ngữ chưa có, **liệt kê** chúng vào mục "Thuật ngữ
+   mới" của file intake để người phụ trách append vào glossary (được làm ngay trong branch feature —
+   xem rule 5 `CLAUDE.md`). KHÔNG tự dịch generic rồi bỏ qua. Không tự sửa/đổi tên term đã có.
 2. Trích xuất từ tài liệu Nhật:
    - User story / behavior (làm gì, cho ai)
    - Bảng field + validation rule (đặc biệt kỹ với bảng Excel — hay chứa rule nghiệp vụ)
@@ -39,6 +41,8 @@ server hoặc sửa dòng `tools:` của agent này cho khớp.
    - **Input sources** — đường dẫn docs + Figma node ID
    - **Prompt for /speckit.specify** — đoạn văn tự nhiên, đưa nguyên vẹn ý tài liệu, ngôn ngữ tiếng Việt + giữ thuật ngữ gốc trong ngoặc. Không tự bịa hay lấp chỗ trống.
    - **Ambiguities to raise in /speckit.clarify** — danh sách mâu thuẫn/mơ hồ giữa basic/detail/Figma
+   - **Thuật ngữ mới (append vào glossary)** — term nghiệp vụ chưa có trong `docs/00-glossary.md` +
+     gợi ý bản dịch Nhật/Việt/Anh, để người phụ trách append vào glossary (làm trong branch feature)
    - **Suggested constitution amendments** — nếu tài liệu này gợi 1 rule chung nên bổ sung vào `.specify/memory/constitution.md`
 
 ## Quy tắc
