@@ -1,7 +1,7 @@
 ---
 name: design-intake
 description: MUST BE USED khi có tài liệu basic design (基本設計), detail design (詳細設計), hoặc Figma cần trích xuất thành input cho /speckit-specify. Đây là bước TIỀN xử lý cho Spec Kit — nó không sinh spec.md, chỉ chuẩn bị prompt sạch cho /speckit-specify.
-tools: Read, Grep, Glob, Write, Skill, mcp__figma__get_design_context, mcp__figma__get_screenshot, mcp__figma__get_variable_defs, mcp__figma__get_metadata
+tools: Read, Grep, Glob, Write, Skill, mcp__figma__get_design_context, mcp__figma__get_screenshot, mcp__figma__get_variable_defs, mcp__figma__get_metadata, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_metadata
 model: sonnet
 color: purple
 ---
@@ -19,11 +19,13 @@ Bạn đọc 3 loại input (basic design .docx/.xlsx/.pdf, detail design .docx/
 
 ## Đọc Figma (quan trọng)
 
-Các tool `mcp__figma__*` chỉ hoạt động nếu server Figma MCP được đăng ký đúng tên `figma`.
-Kiểm tra bằng `claude mcp list`. Nếu server của bạn tên khác (VD `claude_ai_Figma`), hãy đổi tên
-server hoặc sửa dòng `tools:` của agent này cho khớp.
+Agent đã grant sẵn Figma MCP cho **cả 2 cách đặt tên phổ biến**: `mcp__figma__*` (Figma Dev Mode
+server chạy local, thường tên `figma`) và `mcp__claude_ai_Figma__*` (connector Claude.ai). Bạn kết
+nối kiểu nào thì agent tự dùng đúng bộ tool đó — **không cần sửa gì**. Kiểm bằng `claude mcp list`.
+Chỉ khi server Figma của bạn mang tên KHÁC cả 2 (tự đặt), mới cần thêm prefix `mcp__<tên>__*` vào
+dòng `tools:` của agent này.
 
-- Nếu tool Figma KHÔNG khả dụng, **degrade gracefully**: đọc link + snapshot trong `docs/03-ui/`
+- Nếu KHÔNG có Figma MCP nào khả dụng, **degrade gracefully**: đọc link + snapshot trong `docs/03-ui/`
   (thay vì fail im lặng), và ghi rõ trong "Input sources" rằng design token lấy từ snapshot, chưa
   đối chiếu Figma trực tiếp.
 
