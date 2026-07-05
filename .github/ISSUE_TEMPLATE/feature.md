@@ -20,11 +20,22 @@ Xem docs/TEAM-WORKFLOW.md.
 - Detail design (詳細設計): `docs/02-detail-design/<feature>/...`
 - Figma (link + node): `docs/03-ui/<feature>/figma-links.md`
 
-## Owner
-<!-- Ai sở hữu feature này end-to-end -->
+## Owner / Assignee
+<!-- Ai sở hữu feature này END-TO-END (1 người, xem TEAM-WORKFLOW mục 3). Gán luôn GitHub Assignee
+     cho đúng người này để cả team biết ai đang cầm feature. -->
+
+## Blocked by
+<!-- Liệt kê issue phải xong TRƯỚC (VD "#12 auth module"). Để trống nếu độc lập.
+     Giúp xếp thứ tự merge, giảm rebase/conflict chồng chéo. -->
+
+## Affected domains / shared surface
+<!-- Feature này chạm domain/module nào? Có đụng vùng DÙNG CHUNG không?
+     (src/shared/, config, router, docs/00-glossary.md, constitution…)
+     Càng nhiều feature cùng chạm 1 surface → càng dễ conflict/drift (TEAM-WORKFLOW mục 4–5).
+     VD: "domain 予約; append glossary; KHÔNG đụng src/shared". -->
 
 ## Tóm tắt acceptance
 <!-- Chức năng làm gì, cho ai, tiêu chí "xong" chính -->
 
 ## Ghi chú
-<!-- Phụ thuộc feature khác? Ràng buộc? Mâu thuẫn đã thấy trong tài liệu? -->
+<!-- Ràng buộc từ khách? Mâu thuẫn đã thấy trong tài liệu? -->

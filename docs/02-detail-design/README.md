@@ -10,3 +10,6 @@ text-extractable** (VD `field-spec-v1.md`) nếu chưa cài Skill đọc Office.
 - **Business rule + edge case + error state** — các nhánh xử lý, thông báo lỗi, điều kiện biên.
 
 Input càng đủ 2 nhóm này, spec sinh ra càng ít ambiguity phải đưa vào `/speckit-clarify`.
+
+Cùng quy tắc `CHANGELOG.md` như `01-basic-design`: mỗi bản mới ghi 1 mục kèm **Affected issues** (bắt
+buộc) — số issue của feature bị ảnh hưởng để biết cái nào phải re-run (TEAM-WORKFLOW mục 8).

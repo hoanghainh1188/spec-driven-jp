@@ -6,6 +6,16 @@
 #
 # 👉 THAY `@your-lead-handle` bằng GitHub handle thật của (các) steward — VD `@hoanghainh1188`.
 #    Có thể liệt kê nhiều người: `@lead1 @lead2`.
+#
+# GÁC CỔNG GRANULAR (khi team lớn dần):
+#   - Rule cụ thể (path dài) THẮNG rule chung — dòng khớp CUỐI CÙNG áp dụng. Xếp path hẹp ở DƯỚI.
+#   - Có thể giao mỗi domain cho steward khác nhau, VD:
+#       docs/01-basic-design/reservation/   @reservation-lead
+#       docs/01-basic-design/billing/        @billing-lead
+#   - Có thể gác cả vùng code dùng chung (blast-radius lớn) như glossary, VD:
+#       /src/shared/          @your-lead-handle
+#       /src/config/          @your-lead-handle
+#   - KHÔNG gác `src/features/<slug>/` — cô lập theo feature, không cần steward (xem TEAM-WORKFLOW mục 4).
 
 # Thuật ngữ nghiệp vụ dùng chung toàn dự án
 docs/00-glossary.md            @your-lead-handle

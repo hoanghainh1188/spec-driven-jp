@@ -54,7 +54,7 @@ Plugin sẽ cài 4 agent (`design-intake`, `code-reviewer`, `security-reviewer`,
 │   ├── 01-basic-design/            基本設計 gốc từ khách hàng (không sửa tay)
 │   ├── 02-detail-design/           詳細設計 gốc
 │   ├── 03-ui/                      Link Figma + snapshot
-│   ├── 04-decisions/               Câu trả lời cho /speckit-clarify
+│   ├── 04-decisions/               Câu trả lời cho /speckit-clarify (INDEX.md = mục lục tra nhanh)
 │   ├── intake/                     Output của design-intake
 │   └── CONSTITUTION_APPEND.md      Gợi ý các article cho bối cảnh Nhật
 ├── src/
