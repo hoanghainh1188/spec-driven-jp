@@ -13,16 +13,24 @@ Xem docs/TEAM-WORKFLOW.md.
 -->
 
 ## Slug đề xuất
-<!-- kebab-case, ngắn, tra docs/00-glossary.md cho nhất quán nghiệp vụ. VD: user-reservation -->
+<!-- kebab-case, ngắn, tra docs/00-glossary.md cho nhất quán nghiệp vụ. VD: user-reservation
+     → branch 042-user-reservation; thư mục design docs/01-03/user-reservation/ (cùng slug). -->
 
 ## Tài liệu design nguồn
-- Basic design (基本設計): `docs/01-basic-design/<feature>/...`
-- Detail design (詳細設計): `docs/02-detail-design/<feature>/...`
-- Figma (link + node): `docs/03-ui/<feature>/figma-links.md`
+- Basic design (基本設計): `docs/01-basic-design/<slug>/...`
+- Detail design (詳細設計): `docs/02-detail-design/<slug>/...`
+- Figma (link + node): `docs/03-ui/<slug>/figma-links.md`
+  (`<slug>` = phần sau `NNN-` trên branch — khớp `src/features/<slug>/` và intake.)
 
 ## Owner / Assignee
 <!-- Ai sở hữu feature này END-TO-END (1 người, xem TEAM-WORKFLOW mục 3). Gán luôn GitHub Assignee
      cho đúng người này để cả team biết ai đang cầm feature. -->
+
+## Claim feature (sau khi tạo branch)
+<!-- Ngay sau `git checkout -b NNN-<slug>`:
+     1. Xác nhận Assignee = owner ở trên
+     2. Gắn label in-progress lên issue này (tạo label một lần trong repo nếu chưa có)
+     Gỡ label in-progress khi PR merge / issue đóng. -->
 
 ## Blocked by
 <!-- Liệt kê issue phải xong TRƯỚC (VD "#12 auth module"). Để trống nếu độc lập.

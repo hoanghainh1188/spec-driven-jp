@@ -14,7 +14,8 @@ Bạn đọc 3 loại input (basic design .docx/.xlsx/.pdf, detail design .docx/
 
 - Ưu tiên dùng **Skill tool** với skill `docx` / `xlsx` / `pdf` (nếu đã cài) để trích nội dung.
 - Nếu skill tương ứng không có sẵn, DỪNG và yêu cầu người dùng cung cấp bản export text/markdown
-  của tài liệu (đặt cạnh file gốc trong cùng thư mục `docs/01-basic-design/<feature>/`). Không đoán
+  của tài liệu (đặt cạnh file gốc trong cùng thư mục `docs/01-basic-design/<slug>/` — `<slug>` khớp
+  branch `NNN-<slug>`). Không đoán
   nội dung từ tên file.
 
 ## Đọc Figma (quan trọng)

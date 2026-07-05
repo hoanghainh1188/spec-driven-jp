@@ -1,5 +1,8 @@
 # Detail design (詳細設計) — tài liệu GỐC
 
+Mỗi feature 1 thư mục: `docs/02-detail-design/<slug>/` (`<slug>` khớp branch `NNN-<slug>` — xem
+`01-basic-design/README.md`).
+
 Cùng quy tắc đặt / không-sửa / versioning như `01-basic-design`, **gồm cả yêu cầu bản export
 text-extractable** (VD `field-spec-v1.md`) nếu chưa cài Skill đọc Office.
 

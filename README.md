@@ -87,6 +87,13 @@ thật trông thế nào trước khi tự chạy (dùng đường dẫn dạng 
 rm -rf specs/000-example-reservation \
        docs/intake/000-example-reservation.md \
        docs/04-decisions/2026-01-01-approval-vs-confirm.md
+# Xóa dòng mẫu trong INDEX (giữ header + bảng trống / comment ví dụ):
+python3 -c "
+from pathlib import Path
+p = Path('docs/04-decisions/INDEX.md')
+lines = [l for l in p.read_text().splitlines() if '000-example-reservation' not in l]
+p.write_text('\n'.join(lines) + '\n')
+"
 ```
 
 ## Workflow cho 1 feature
@@ -94,10 +101,11 @@ rm -rf specs/000-example-reservation \
 ### Bước bạn thao tác
 1. **Tạo GitHub issue** cho feature (số issue = ID feature), rồi tạo branch `NNN-<slug>` với
    `NNN` = số issue zero-pad ≥ 3 chữ số (VD issue #42 → `042-user-reservation`).
-2. **Đặt tài liệu nguồn** (không sửa nội dung gốc), mỗi feature 1 thư mục:
-   - `docs/01-basic-design/<feature>/` — 基本設計 (user story / behavior)
-   - `docs/02-detail-design/<feature>/` — 詳細設計 (bảng field + validation, business rule / edge / error)
-   - `docs/03-ui/<feature>/figma-links.md` — link Figma + snapshot
+2. **Đặt tài liệu nguồn** (không sửa nội dung gốc), mỗi feature 1 thư mục — **`<slug>` = phần sau
+   `NNN-` trên branch** (VD `042-user-reservation` → `user-reservation`):
+   - `docs/01-basic-design/<slug>/` — 基本設計 (user story / behavior)
+   - `docs/02-detail-design/<slug>/` — 詳細設計 (bảng field + validation, business rule / edge / error)
+   - `docs/03-ui/<slug>/figma-links.md` — link Figma + snapshot
    > ⚠️ `Read` không parse `.docx/.xlsx/.pdf` nhị phân — kèm **bản export text/markdown** cạnh file gốc
    > (hoặc cài Skill `docx/xlsx/pdf`). Cấu trúc + checklist nội dung đầy đủ: xem `README.md` trong từng
    > thư mục `docs/01-03`.
