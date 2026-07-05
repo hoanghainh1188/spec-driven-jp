@@ -9,6 +9,7 @@ Bắt các lỗi mà check `test -f` bỏ sót:
   2. Frontmatter của subagent thiếu key bắt buộc (name/description/tools).
   3. Runbook `design-to-code.md` đánh số bước không liên tục từ 1.
   4. Mermaid dùng class (`:::x`) chưa được `classDef`.
+  5. Glossary có thuật ngữ 日本語 trùng nhau (2 dòng cùng 1 term → nhập nhằng).
 
 Không phụ thuộc package ngoài — chỉ dùng stdlib, không cần mạng.
 """
@@ -121,12 +122,42 @@ def check_mermaid(md_files: list[str]) -> None:
                 err(f"[mermaid] {rel}: dùng class chưa classDef → {sorted(missing)}")
 
 
+SEP_RE = re.compile(r"^[\s|:\-]+$")
+
+
+def check_glossary_duplicates() -> None:
+    path = os.path.join(ROOT, "docs", "00-glossary.md")
+    if not os.path.exists(path):
+        err("[glossary] không tìm thấy docs/00-glossary.md")
+        return
+    with open(path, encoding="utf-8") as f:
+        lines = f.read().splitlines()
+    seen: dict[str, int] = {}
+    for i, line in enumerate(lines, start=1):
+        s = line.strip()
+        if not s.startswith("|"):
+            continue
+        if SEP_RE.match(s):  # dòng phân cách |---|
+            continue
+        cells = [c.strip() for c in s.strip("|").split("|")]
+        if not cells:
+            continue
+        term = cells[0]
+        if not term or term == "日本語":  # bỏ header
+            continue
+        if term in seen:
+            err(f"[glossary] 日本語 '{term}' trùng ở dòng {seen[term]} và {i}")
+        else:
+            seen[term] = i
+
+
 def main() -> int:
     md_files = iter_markdown()
     check_internal_links(md_files)
     check_agent_frontmatter()
     check_runbook_numbering()
     check_mermaid(md_files)
+    check_glossary_duplicates()
 
     if errors:
         print("✗ check-template: phát hiện vấn đề\n")
@@ -134,7 +165,7 @@ def main() -> int:
             print("  " + e)
         print(f"\nTổng: {len(errors)} lỗi")
         return 1
-    print("✓ check-template: link nội bộ, frontmatter, số bước, mermaid đều hợp lệ")
+    print("✓ check-template: link nội bộ, frontmatter, số bước, mermaid, glossary đều hợp lệ")
     return 0
 
 
