@@ -56,24 +56,32 @@ và tự quản (chấp nhận rủi ro trùng khi song song), hoặc dùng over
 > (VD issue `#1` → `001-<slug>`).
 
 > Gợi ý: giữ `slug` kebab-case, ngắn gọn, tra `docs/00-glossary.md` để đặt tên nhất quán nghiệp vụ.
-> Dùng **cùng `<slug>`** xuyên suốt: branch `NNN-<slug>`, intake `docs/intake/<NNN>-<slug>.md`,
-> code `src/features/<slug>/` — một slug, dò dấu vết dễ.
+> Dùng **cùng `<slug>`** xuyên suốt: branch `NNN-<slug>`, thư mục design `docs/01-03/<slug>/`,
+> intake `docs/intake/<NNN>-<slug>.md`, code `src/features/<slug>/` — một slug, dò dấu vết dễ.
+> (`<slug>` = phần sau `NNN-` trên branch; VD `042-user-reservation` → `user-reservation`.)
 
 ---
 
 ## 3. Vòng đời 1 feature (nhóm)
 
 ```
-1. Tạo GitHub issue (Feature template)         → có số issue = ID
+1. Tạo GitHub issue (Feature template)         → có số issue = ID; gán Assignee
 2. git checkout main && git pull               → nền mới nhất
 3. git checkout -b NNN-<slug>                   (NNN = số issue, zero-pad ≥3)
-4. Đặt tài liệu vào docs/01-basic-design/<feature>/, 02-detail-design/, 03-ui/
+   → gán label in-progress trên issue (claim — cả team biết feature đang active)
+4. Đặt tài liệu vào docs/01-basic-design/<slug>/, 02-detail-design/<slug>/, 03-ui/<slug>/
+   (<slug> = phần sau NNN- trên branch — khớp intake + src/features/)
 5. /design-to-code                              → intake → speckit → implement → review → test
 6. Mở PR "Closes #<issue>"                      (điền PR template)
 7. code-reviewer + glossary-steward + security-reviewer + human review; sửa Blocking
 8. Test gate: xanh + coverage ≥ ngưỡng constitution (Article W, mặc định 80%)
-9. CI xanh + review pass → merge vào main       → tự đóng issue
+9. CI xanh + review pass → merge vào main       → tự đóng issue; gỡ label in-progress
 ```
+
+**Claim feature:** sau bước 3, issue phải có **Assignee** (owner) + label **`in-progress`**. Tạo label
+`in-progress` một lần trong repo nếu chưa có. Steward/lead: nếu 2 issue `in-progress` cùng **Affected
+domains / shared surface** (xem issue template) → xếp thứ tự merge hoặc ghi `Blocked by` trước khi cả
+hai chạm `src/shared/` hoặc glossary.
 
 **Một người sở hữu 1 feature end-to-end.** Pipeline `/design-to-code` không có điểm bàn giao giữa
 chừng — chuyển tay giữa dòng dễ mất ngữ cảnh intake. Nếu **buộc** phải chuyển tay, chỉ chuyển qua
@@ -118,6 +126,7 @@ GitHub issue #NNN
       ▼
 branch  NNN-<slug>                         ← ID toàn cục, không trùng (mục 2)
       │
+      ├─ docs/01-03/<slug>/                 ← design gốc (1 thư mục/feature)
       ├─ docs/intake/<NNN>-<slug>.md        ← 1 file/feature (mục 9 hotspot: Thấp)
       ├─ docs/04-decisions/<date>-<slug>.md ← 1 file/quyết định
       ├─ specs/<timestamp>-<slug>/          ← Spec Kit timestamp, không quét (mục 2)
@@ -264,7 +273,7 @@ Settings → Branches → Add rule cho `main`:
 
 1. **Setup load-bearing trước:** điền CODEOWNERS thật + bật branch protection — nếu không, gác cổng vô hiệu.
 2. Tạo **issue trước** → số issue là **ID feature** → branch `NNN-<slug>` (zero-pad ≥3). Cùng `<slug>`
-   cho intake + `src/features/`.
+   cho `docs/01-03/`, intake + `src/features/`. Claim: Assignee + label `in-progress`.
 3. **1 người sở hữu 1 feature** end-to-end; branch ngắn hạn; PR `Closes #issue`; chuyển tay chỉ qua
    Handoff checklist (`docs/intake/README.md`).
 4. Sửa **glossary/constitution** → **PR riêng, steward duyệt**; rồi cả team rebase. THÊM term thì append trong branch.

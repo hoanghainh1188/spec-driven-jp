@@ -1,6 +1,7 @@
 # UI reference — link Figma, KHÔNG phải file thiết kế thật
 
-Figma là nguồn UI duy nhất. Thư mục này mỗi feature chỉ chứa:
+Figma là nguồn UI duy nhất. Mỗi feature 1 thư mục: `docs/03-ui/<slug>/` (`<slug>` khớp branch
+`NNN-<slug>` — xem `01-basic-design/README.md`). Trong thư mục chỉ chứa:
 - `figma-links.md` — link file/node ID Figma, **ghi rõ mỗi node là màn hình gì** (design-intake
   dựa vào đó để map UI ↔ behavior).
 - `screenshots/` — ảnh chụp mốc TẠI THỜI ĐIỂM code được sinh; đây là **fallback** khi không có

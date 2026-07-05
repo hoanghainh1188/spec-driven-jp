@@ -1,6 +1,8 @@
 # Basic design (基本設計) — tài liệu GỐC từ khách hàng
 
-Mỗi feature 1 thư mục: `docs/01-basic-design/<feature>/`
+Mỗi feature 1 thư mục: `docs/01-basic-design/<slug>/`
+(`<slug>` = phần sau `NNN-` trên branch — VD `042-user-reservation` → `user-reservation/`;
+cùng slug với `docs/02-detail-design/<slug>/`, `docs/03-ui/<slug>/`, `src/features/<slug>/`.)
 Versioned (`v1.docx`, `v2.docx`…) + `CHANGELOG.md` khi có bản mới.
 Agent KHÔNG BAO GIỜ sửa nội dung ở đây.
 
@@ -13,7 +15,7 @@ Agent KHÔNG BAO GIỜ sửa nội dung ở đây.
 Layout gợi ý:
 
 ```
-docs/01-basic-design/<feature>/
+docs/01-basic-design/<slug>/
 ├── basic-design-v1.docx     # gốc khách (không sửa)
 ├── basic-design-v1.md       # ★ export text nếu chưa có Skill đọc Office
 └── CHANGELOG.md

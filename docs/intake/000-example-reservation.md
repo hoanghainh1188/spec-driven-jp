@@ -1,5 +1,6 @@
 > ⚠️ **FEATURE MẪU — XOÁ TRƯỚC KHI DÙNG THẬT.**
 > Đây là ví dụ minh hoạ output của subagent `design-intake` để bạn pattern-match.
+> **File thật** đặt tên `docs/intake/<NNN>-<slug>.md` (VD issue #42 → `042-user-reservation.md`).
 > Xoá cả 3 file mẫu:
 > `docs/intake/000-example-reservation.md`, `docs/04-decisions/2026-01-01-approval-vs-confirm.md`,
 > và thư mục `specs/000-example-reservation/`.
