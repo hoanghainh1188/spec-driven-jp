@@ -7,7 +7,7 @@ Closes #<!-- số issue = feature ID -->
 <!-- Feature này làm gì, dựa trên tài liệu design nào -->
 
 ## Traceability (đã commit vào branch)
-- [ ] `docs/intake/<feature>.md` — output của `design-intake`
+- [ ] `docs/intake/<NNN>-<slug>.md` — output của `design-intake` (đặt theo số issue)
 - [ ] `docs/04-decisions/*` — mọi câu trả lời `/speckit-clarify` (nếu có ambiguity)
 - [ ] `specs/<feature>/` — spec.md / plan.md / tasks.md do Spec Kit sinh
 

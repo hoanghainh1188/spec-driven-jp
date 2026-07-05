@@ -156,7 +156,7 @@ command). Vì vậy có 2 loại bước:
 Trình tự đầy đủ:
 
 1. `[TỰ CHẠY]` tạo branch `NNN-<feature-slug>` (Spec Kit dùng tên branch để phát hiện feature)
-2. `[TỰ CHẠY]` `design-intake` đọc tài liệu → sinh `docs/intake/<feature>.md`
+2. `[TỰ CHẠY]` `design-intake` đọc tài liệu → sinh `docs/intake/<NNN>-<slug>.md` (khớp tên branch)
 3. **[DỪNG]** bạn review file intake (prompt + ambiguities)
 4. `[HANDOFF]` `/speckit-specify <prompt từ intake>`
 5. `[HANDOFF]` `/speckit-clarify` (nếu có mâu thuẫn) → câu trả lời ghi vào `docs/04-decisions/`

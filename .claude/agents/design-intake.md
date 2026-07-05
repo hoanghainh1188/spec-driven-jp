@@ -34,15 +34,18 @@ dòng `tools:` của agent này.
 1. Tra `docs/00-glossary.md` trước. Nếu gặp thuật ngữ chưa có, **liệt kê** chúng vào mục "Thuật ngữ
    mới" của file intake để người phụ trách append vào glossary (được làm ngay trong branch feature —
    xem rule 5 `CLAUDE.md`). KHÔNG tự dịch generic rồi bỏ qua. Không tự sửa/đổi tên term đã có.
+   Đồng thời quét `docs/04-decisions/INDEX.md` — nếu một mâu thuẫn/mơ hồ đã có quyết định ở đó,
+   **không liệt kê lại** vào "Ambiguities"; áp dụng luôn quyết định cũ (rule 2 + 6 `CLAUDE.md`).
 2. Trích xuất từ tài liệu Nhật:
    - User story / behavior (làm gì, cho ai)
    - Bảng field + validation rule (đặc biệt kỹ với bảng Excel — hay chứa rule nghiệp vụ)
    - Business rule + edge case + error state trong detail design
    - Design token từ Figma variable (chỉ nếu khác theme đã có)
-3. Ghi kết quả ra `docs/intake/<feature-slug>.md` gồm các mục:
+3. Ghi kết quả ra `docs/intake/<NNN>-<slug>.md` (khớp tên branch `NNN-<slug>`) gồm các mục:
    - **Input sources** — đường dẫn docs + Figma node ID
    - **Prompt for /speckit-specify** — đoạn văn tự nhiên, đưa nguyên vẹn ý tài liệu, ngôn ngữ tiếng Việt + giữ thuật ngữ gốc trong ngoặc. Không tự bịa hay lấp chỗ trống.
    - **Ambiguities to raise in /speckit-clarify** — danh sách mâu thuẫn/mơ hồ giữa basic/detail/Figma
+     (đã loại các mục có quyết định trong `docs/04-decisions/INDEX.md`)
    - **Thuật ngữ mới (append vào glossary)** — term nghiệp vụ chưa có trong `docs/00-glossary.md` +
      gợi ý bản dịch Nhật/Việt/Anh, để người phụ trách append vào glossary (làm trong branch feature)
    - **Suggested constitution amendments** — nếu tài liệu này gợi 1 rule chung nên bổ sung vào `.specify/memory/constitution.md`
