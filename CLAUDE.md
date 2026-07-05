@@ -31,7 +31,11 @@ giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
 
 - **`.specify/memory/constitution.md`** — nguyên tắc bất di bất dịch của dự án. Thắng mọi thứ khác trong workflow Spec Kit.
 
-- **`src/`** — code thật. Agent bám theo pattern đã có, không tự đổi kiến trúc.
+- **`src/`** — code thật. Agent bám theo pattern đã có, không tự đổi kiến trúc. **Cô lập theo feature:**
+  code riêng của 1 feature nằm trong `src/features/<slug>/` (`<slug>` = phần slug của branch `NNN-<slug>`)
+  → 2 feature chạy song song hiếm khi đụng cùng file. Chỉ chạm vùng dùng chung (`src/shared/`, config,
+  router, DI container…) khi thật cần, và tách commit nhỏ để giảm merge conflict.
+  Xem `docs/TEAM-WORKFLOW.md`.
 
 ## Cách chạy pipeline sinh code từ design
 Gõ `/design-to-code` trong Claude Code, cung cấp đường dẫn tài liệu và link Figma khi được hỏi.
