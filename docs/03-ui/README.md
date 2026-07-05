@@ -14,3 +14,17 @@ Format gợi ý cho `figma-links.md`:
 - Snapshot ngày: YYYY-MM-DD
 - Sinh code từ commit: <git-sha>
 ```
+
+## Khi UI đổi giữa chừng — `CHANGELOG.md` + "Affected issues"
+
+UI thật nằm ở Figma (versioned bên đó), nhưng khi khách đổi thiết kế đáng kể (đổi luồng màn, thêm/bỏ
+field trên UI…), ghi 1 mục vào `CHANGELOG.md` của feature — **cùng quy tắc `01-basic-design` /
+`02-detail-design`**. Mục **Affected issues** là **bắt buộc**: liệt kê số issue của feature bị ảnh
+hưởng để biết cái nào phải re-run pipeline (TEAM-WORKFLOW mục 8). Cập nhật kèm `Snapshot ngày` mới
+trong `figma-links.md`.
+
+```markdown
+## v2 — 2026-07-10
+- Thay đổi: <đổi gì trên UI so với snapshot trước>
+- **Affected issues:** #42, #57   ← bắt buộc
+```

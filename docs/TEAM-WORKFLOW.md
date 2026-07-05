@@ -118,7 +118,7 @@ GitHub issue #NNN
       ▼
 branch  NNN-<slug>                         ← ID toàn cục, không trùng (mục 2)
       │
-      ├─ docs/intake/<NNN>-<slug>.md        ← 1 file/feature (mục 8 hotspot: Thấp)
+      ├─ docs/intake/<NNN>-<slug>.md        ← 1 file/feature (mục 9 hotspot: Thấp)
       ├─ docs/04-decisions/<date>-<slug>.md ← 1 file/quyết định
       ├─ specs/<timestamp>-<slug>/          ← Spec Kit timestamp, không quét (mục 2)
       └─ src/features/<slug>/               ← code cô lập (mục 4)

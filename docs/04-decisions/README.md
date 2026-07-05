@@ -12,3 +12,9 @@ docs/04-decisions/<YYYY-MM-DD>-<slug>.md
 - Người quyết định: <tên>
 
 Đây là "long-term memory" cho các mâu thuẫn đã xử lý — tránh hỏi lại ở feature sau.
+
+## Mục lục — [`INDEX.md`](INDEX.md)
+
+Mỗi khi thêm 1 file quyết định, **append 1 dòng** vào [`INDEX.md`](INDEX.md) (ngày · quyết định ·
+feature · thuật ngữ). `design-intake` và `/speckit-clarify` quét `INDEX.md` **trước** khi hỏi lại —
+nếu ambiguity đã có quyết định, dùng lại thay vì hỏi lần nữa (rule 2 + 6 `CLAUDE.md`).
