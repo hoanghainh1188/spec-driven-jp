@@ -55,6 +55,7 @@ Plugin sẽ cài 4 agent (`design-intake`, `code-reviewer`, `security-reviewer`,
 │   ├── 02-detail-design/           詳細設計 gốc
 │   ├── 03-ui/                      Link Figma + snapshot
 │   ├── 04-decisions/               Câu trả lời cho /speckit-clarify (INDEX.md = mục lục tra nhanh)
+│   ├── 05-lessons.md               Bài học / gotcha kỹ thuật gặp khi code (append 1 dòng)
 │   ├── intake/                     Output của design-intake
 │   └── CONSTITUTION_APPEND.md      Gợi ý các article cho bối cảnh Nhật
 ├── src/
@@ -124,7 +125,8 @@ p.write_text('\n'.join(lines) + '\n')
 ```mermaid
 flowchart TD
     A["📁 Đặt tài liệu vào docs/01-03/"]:::user --> B["⌨️ Gõ /design-to-code"]:::user
-    B --> C["Tạo git branch NNN-feature"]:::auto
+    B --> B2["Nạp memory: constitution + glossary<br/>+ decisions INDEX + lessons"]:::auto
+    B2 --> C["Tạo git branch NNN-feature"]:::auto
     C --> D["design-intake đọc tài liệu → docs/intake/"]:::auto
     D --> E{"DỪNG — review intake<br/>prompt + ambiguities"}:::stop
     E --> F["/speckit-specify — prompt từ intake"]:::handoff
@@ -166,22 +168,23 @@ command). Vì vậy có 2 loại bước:
 
 Trình tự đầy đủ:
 
-1. `[TỰ CHẠY]` tạo branch `NNN-<feature-slug>` (Spec Kit dùng tên branch để phát hiện feature)
-2. `[TỰ CHẠY]` `design-intake` đọc tài liệu → sinh `docs/intake/<NNN>-<slug>.md` (khớp tên branch)
-3. **[DỪNG]** bạn review file intake (prompt + ambiguities)
-4. `[HANDOFF]` `/speckit-specify <prompt từ intake>`
-5. `[HANDOFF]` `/speckit-clarify` (nếu có mâu thuẫn) → câu trả lời ghi vào `docs/04-decisions/`
-6. `[HANDOFF]` `/speckit-plan`
-7. `[HANDOFF]` `/speckit-tasks`
-8. **[DỪNG]** `/speckit-analyze` → sửa spec/plan/tasks nếu có cảnh báo trước khi implement
-9. `[HANDOFF]` `/speckit-implement` → sinh code thật
-10. `[TỰ CHẠY]` `code-reviewer` đối chiếu code với constitution + spec + plan + tasks → xử lý mọi **Blocking**
-11. `[TỰ CHẠY]` `glossary-steward` đối chiếu term code/spec vs `docs/00-glossary.md` → sửa term lệch (term **mới** → append thẳng trong branch feature; chỉ **SỬA/đổi tên** term đã có mới cần PR glossary riêng)
-12. `[TỰ CHẠY]` `security-reviewer` soi OWASP + secret + PII (chỉ khi feature đụng data/auth/API; nếu không thì tự SKIP) → xử lý mọi **Blocking**
-13. **[DỪNG] Test gate** — format tự chạy qua hook `.claude/hooks/format.sh`; verify `npm run lint/test/build` phải xanh **và coverage đạt ngưỡng constitution** (Article W — mặc định ≥ 80% business logic)
-14. **[DỪNG] Deploy** — theo phương thức khai trong mục `## Deploy` của `CLAUDE.md`
+1. `[TỰ CHẠY]` **nạp memory** — đọc + tóm tắt `constitution` + `docs/00-glossary.md` + `docs/04-decisions/INDEX.md` + `docs/05-lessons.md` + `CLAUDE.md` (recall bắt buộc, chống lệch ngữ cảnh)
+2. `[TỰ CHẠY]` tạo branch `NNN-<feature-slug>` (Spec Kit dùng tên branch để phát hiện feature)
+3. `[TỰ CHẠY]` `design-intake` đọc tài liệu → sinh `docs/intake/<NNN>-<slug>.md` (khớp tên branch)
+4. **[DỪNG]** bạn review file intake (prompt + ambiguities)
+5. `[HANDOFF]` `/speckit-specify <prompt từ intake>`
+6. `[HANDOFF]` `/speckit-clarify` (nếu có mâu thuẫn) → câu trả lời ghi vào `docs/04-decisions/` + append `INDEX.md`
+7. `[HANDOFF]` `/speckit-plan`
+8. `[HANDOFF]` `/speckit-tasks`
+9. **[DỪNG]** `/speckit-analyze` → sửa spec/plan/tasks nếu có cảnh báo trước khi implement
+10. `[HANDOFF]` `/speckit-implement` → sinh code thật
+11. `[TỰ CHẠY]` `code-reviewer` đối chiếu code với constitution + spec + plan + tasks (+ `docs/05-lessons.md`) → xử lý mọi **Blocking**
+12. `[TỰ CHẠY]` `glossary-steward` đối chiếu term code/spec vs `docs/00-glossary.md` → sửa term lệch (term **mới** → append thẳng trong branch feature; chỉ **SỬA/đổi tên** term đã có mới cần PR glossary riêng)
+13. `[TỰ CHẠY]` `security-reviewer` soi OWASP + secret + PII (chỉ khi feature đụng data/auth/API; nếu không thì tự SKIP) → xử lý mọi **Blocking**
+14. **[DỪNG] Test gate** — format tự chạy qua hook `.claude/hooks/format.sh`; verify `npm run lint/test/build` phải xanh **và coverage đạt ngưỡng constitution** (Article W — mặc định ≥ 80% business logic); gặp gotcha → append `docs/05-lessons.md`
+15. **[DỪNG] Deploy** — theo phương thức khai trong mục `## Deploy` của `CLAUDE.md`
 
-Cuối cùng, commit `docs/intake/`, `docs/04-decisions/`, `specs/<feature>/` làm bằng chứng traceability.
+Cuối cùng, commit `docs/intake/`, `docs/04-decisions/`, `docs/05-lessons.md`, `specs/<feature>/` làm bằng chứng traceability.
 
 ## Làm việc nhóm (nhiều người / 1 dự án)
 

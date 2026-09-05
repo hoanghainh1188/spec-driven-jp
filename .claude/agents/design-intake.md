@@ -37,6 +37,8 @@ dòng `tools:` của agent này.
    xem rule 5 `CLAUDE.md`). KHÔNG tự dịch generic rồi bỏ qua. Không tự sửa/đổi tên term đã có.
    Đồng thời quét `docs/04-decisions/INDEX.md` — nếu một mâu thuẫn/mơ hồ đã có quyết định ở đó,
    **không liệt kê lại** vào "Ambiguities"; áp dụng luôn quyết định cũ (rule 2 + 6 `CLAUDE.md`).
+   Và đọc `docs/05-lessons.md` — nếu tài liệu chạm vào một gotcha đã ghi, nhắc lại trong intake để
+   spec/code không vấp lại.
 2. Trích xuất từ tài liệu Nhật:
    - User story / behavior (làm gì, cho ai)
    - Bảng field + validation rule (đặc biệt kỹ với bảng Excel — hay chứa rule nghiệp vụ)

@@ -15,6 +15,9 @@ Bạn review code do `/speckit-implement` vừa sinh, đối chiếu với 4 ngu
 3. **`specs/<feature>/plan.md`** — cấu trúc file có khớp plan không?
 4. **`specs/<feature>/tasks.md`** — task nào chưa hoàn thành hoặc chỉ hoàn thành hình thức?
 
+Ngoài ra tra `docs/05-lessons.md` — code có lặp lại một gotcha đã ghi không? Nếu có → **Blocking**.
+Nếu phát hiện gotcha *mới* trong lúc review → gợi ý người phụ trách append 1 dòng vào `docs/05-lessons.md`.
+
 ## Output
 
 Báo cáo 3 mục:

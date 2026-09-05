@@ -26,8 +26,12 @@ giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
   liên quan nghiệp vụ. Gặp thuật ngữ mới → **append** vào đây trước khi đặt tên (được làm ngay trong branch
   feature, xem rule 5), không tự dịch rồi bỏ qua.
 
-- **`docs/04-decisions/`** — nơi lưu câu trả lời cho mọi ambiguity mà `/speckit-clarify` từng giải quyết.
-  Trước khi hỏi lại 1 câu đã có trong đây, agent phải tra cứu trước.
+- **`docs/04-decisions/`** — nơi lưu câu trả lời cho mọi ambiguity mà `/speckit-clarify` từng giải quyết
+  (`INDEX.md` = mục lục tra nhanh). Trước khi hỏi lại 1 câu đã có trong đây, agent phải tra cứu trước.
+
+- **`docs/05-lessons.md`** — bài học / gotcha kỹ thuật đặc thù dự án phát hiện khi code (KHÔNG phải
+  thuật ngữ, KHÔNG phải nguyên tắc, KHÔNG phải trả lời ambiguity). Append 1 dòng, đọc ở đầu pipeline
+  để không lặp lỗi cũ.
 
 - **`docs/intake/`** — output của subagent `design-intake`. Đây là cầu nối giữa tài liệu Nhật/Figma và Spec Kit.
 
@@ -42,6 +46,28 @@ giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
   router, DI container…) khi thật cần, và tách commit nhỏ để giảm merge conflict.
   Xem `docs/TEAM-WORKFLOW.md`.
 
+## Memory (bộ nhớ dự án)
+
+Agent trong pipeline là **stateless** — mỗi `/speckit-*` và mỗi subagent là lần gọi mới, không nhớ lần
+trước. Nên memory phải **externalize thành file commit vào Git**. Có 5 nguồn, mỗi loại một nhà:
+
+| Nguồn | Loại memory | Ai ghi |
+|---|---|---|
+| `.specify/memory/constitution.md` | Nguyên tắc bất biến | `/speckit-constitution` + PR steward |
+| `docs/00-glossary.md` | Thuật ngữ (semantic) | append trong branch; SỬA → PR steward |
+| `docs/04-decisions/` + `INDEX.md` | Quyết định ambiguity | `/speckit-clarify` → runbook ghi |
+| `docs/05-lessons.md` | Gotcha kỹ thuật | append trong branch khi gặp |
+| `CLAUDE.md` | Quy ước dự án (auto-load) | PR |
+
+**Recall là bắt buộc, không tự nguyện:** bước 1 của `/design-to-code` ("Nạp memory") đọc + tóm tắt các
+nguồn trên trước khi làm gì khác → chống *context drift*.
+
+**Vì sao file, không phải database:** memory ở đây low-volume, human-authored, cần **versioned lock-step
+với code** (checkout commit cũ ra đúng ngữ cảnh cũ), cần **review qua PR diff** (gác cổng CODEOWNERS), và
+cần **zero-infra** (clone là chạy). DB phá cả 3 thuộc tính đó và không sửa được vấn đề thật (kỷ luật đọc).
+Chỉ cân nhắc lớp index/RAG *đọc-thẳng-từ file git* khi corpus lớn tới mức `grep` thất bại — khi đó git
+vẫn là source of truth, DB chỉ là cache dẫn xuất.
+
 ## Cách chạy pipeline sinh code từ design
 Gõ `/design-to-code` trong Claude Code, cung cấp đường dẫn tài liệu và link Figma khi được hỏi.
 
@@ -51,12 +77,12 @@ Gõ `/design-to-code` trong Claude Code, cung cấp đường dẫn tài liệu 
 - Bước dùng **Spec Kit** (`/speckit-specify|clarify|plan|tasks|analyze|implement`) → command in ra
   lệnh chính xác để **bạn tự dán và chạy**, rồi dừng chờ bạn báo xong.
 
-Trình tự: design-intake → [handoff] specify → clarify → plan → tasks → analyze → implement
-→ code-reviewer → glossary-steward → security-reviewer → **test gate** → **deploy**.
+Trình tự: **nạp memory** → design-intake → [handoff] specify → clarify → plan → tasks → analyze →
+implement → code-reviewer → glossary-steward → security-reviewer → **test gate** → **deploy**.
 Dừng xin xác nhận ở mọi checkpoint.
 
 ## Deploy
-<Điền phương thức deploy cụ thể của dự án — `/design-to-code` bước 14 sẽ đọc mục này.
+<Điền phương thức deploy cụ thể của dự án — `/design-to-code` bước 15 sẽ đọc mục này.
 Ví dụ: `vercel --prod`, hoặc push lên branch trigger CI/CD, hoặc build container + đẩy registry.
 Nếu để trống, pipeline sẽ dừng và hỏi bạn trước khi deploy.>
 

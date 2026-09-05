@@ -23,6 +23,7 @@ jobs:
           test -f .claude/hooks/format.sh
           test -f .claude/commands/design-to-code.md
           test -f docs/00-glossary.md
+          test -f docs/05-lessons.md
           test -f docs/CONSTITUTION_APPEND.md
           test -f .claude-plugin/plugin.json
           test -f .claude-plugin/marketplace.json
