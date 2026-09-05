@@ -10,6 +10,11 @@ giúp mọi agent nhất quán ngay từ lượt gọi đầu tiên>
 > Khi đã chốt stack: điền lệnh formatter vào `.claude/hooks/format.sh` để bật format-on-save
 > (PostToolUse hook chạy sau mỗi Edit/Write). Thứ tự chuẩn: format → lint → type check → build
 > (lint/test/build chạy ở Test gate của `/design-to-code`).
+>
+> ⚠️ **`.claude/settings.json` allow-list mặc định giả định `npm`** (`Bash(npm run lint|test|build)`,
+> `Bash(npm install *)`) — vì JSON không chứa comment được. Nếu stack KHÁC JS/TS, đổi các dòng này
+> sang lệnh tương đương (VD `go test ./...`, `pytest`, `./gradlew test|build`, `cargo test`). Không đổi
+> cũng không sao — chỉ mất tiện auto-approve, các lệnh lạ sẽ rơi vào chế độ hỏi (`ask`), không bị chặn.
 
 ## Cấu trúc và ý nghĩa từng phần
 

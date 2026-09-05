@@ -76,15 +76,18 @@ Sau khi chạy `bootstrap.sh`, thêm:
 
 ## Feature mẫu để tham khảo (xoá được)
 
-Template kèm 1 feature mẫu tí hon — **予約承認 (duyệt đặt chỗ)** — để bạn thấy chuỗi traceability
-thật trông thế nào trước khi tự chạy (dùng đường dẫn dạng code để xoá xong không để lại link chết):
+Template kèm 1 feature mẫu tí hon — **予約承認 (duyệt đặt chỗ)** — để bạn thấy **cả chuỗi traceability
+lẫn hình dạng code** trước khi tự chạy (đường dẫn dạng code để xoá xong không để lại link chết):
 - `docs/intake/000-example-reservation.md` — output mẫu của `design-intake`
 - `docs/04-decisions/2026-01-01-approval-vs-confirm.md` — quyết định clarify mẫu
-- `specs/000-example-reservation/spec.md` — spec mẫu (bình thường do Spec Kit sinh)
+- `specs/000-example-reservation/` — `spec.md` + `plan.md` + `tasks.md` mẫu (bình thường do Spec Kit sinh)
+- `src/features/example-reservation/` — **code + test mẫu** (hàm thuần + unit test cạnh nhau), minh hoạ
+  layout `src/features/<slug>/`, dùng thuật ngữ glossary trong tên, và TDD theo Article W
 
 **Xoá trước khi làm dự án thật:**
 ```bash
 rm -rf specs/000-example-reservation \
+       src/features/example-reservation \
        docs/intake/000-example-reservation.md \
        docs/04-decisions/2026-01-01-approval-vs-confirm.md
 # Xóa dòng mẫu trong INDEX (giữ header + bảng trống / comment ví dụ):
@@ -200,6 +203,9 @@ Cuối cùng, commit `docs/intake/`, `docs/04-decisions/`, `specs/<feature>/` l�
 
 📖 Chi tiết đầy đủ (vòng đời feature, bảng điểm nóng conflict, xử lý cập nhật design giữa chừng):
 [`docs/TEAM-WORKFLOW.md`](docs/TEAM-WORKFLOW.md).
+
+> 🔒 **Trước khi lên dự án thật**, chạy qua [`docs/PRODUCTION-READINESS.md`](docs/PRODUCTION-READINESS.md) —
+> checklist biến các gác cổng "tự khai" (coverage, review, secret) thành gate ép bằng CI/branch protection.
 
 ## Yêu cầu môi trường
 
